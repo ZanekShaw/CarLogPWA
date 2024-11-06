@@ -1,7 +1,7 @@
 {
 "name": "CarLogPWA",
 "short_name": "CarLogPWA",
-"start_url": "http://localhost:3000/",
+"start_url": "https://car-log-pwa.vercel.app/",
 "display": "standalone",
 "description": "CarLogPWA",
 "lang": " English",
@@ -34,7 +34,7 @@
 "related_applications": [
   {
     "platform":"windows",
-    "url": "http://localhost:3000/"
+    "url": "https://car-log-pwa.vercel.app/"
   }
 ],
 "prefer_related_applications": false,
