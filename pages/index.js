@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import localFont from "next/font/local";
 import styles from "../styles/Home.module.css";
+import { getSession } from "next-auth/react";
+import { sql } from "@vercel/postgres";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,7 +16,46 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export default function Home() {
+
+export async function getServerSideProps(context) {
+  // Retrieve session to get the logged-in user
+  const session = await getSession(context);
+
+  // Check if a user is logged in
+  if (!session) {
+    // Redirect to login page if no user is logged in
+    return {
+      redirect: {
+        destination: '/auth/signin',
+        permanent: false,
+      },
+    };
+  }
+
+  // Get the user's ID from the session object (assuming session contains user_id)
+  const userId = session.user.id;
+
+  // Fetch data only for the logged-in user
+  const logResult = await sql`SELECT * FROM logs WHERE user_id = ${userId}`;
+
+  // Convert Date fields in `logs` table to JSON-serializable strings
+  const logs = logResult.rows.map(row => ({
+    ...row,
+    date: row.date ? row.date.toISOString().split('T')[0] : null, // Only keep the date part
+    start_time: row.start_time ? row.start_time.toISOString() : null,
+    end_time: row.end_time ? row.end_time.toISOString() : null,
+  }));
+
+  return {
+    props: {
+      logs
+    },
+  };
+}
+
+export default function Home(props) {
+  console.log(props)
+
   return (
     <>
       <Head>
@@ -41,6 +82,8 @@ export default function Home() {
             </li>
             <li>Save and see your changes instantly.</li>
           </ol>
+
+          Hi
 
           <div className={styles.ctas}>
             <a

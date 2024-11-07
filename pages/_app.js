@@ -1,7 +1,39 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { SessionProvider, getSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
+
 
 export default function App({ Component, pageProps }) {
+
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    const checkSession = async () => {
+      // Exclude login and public pages from redirection
+      if (router.pathname === '/auth/signin') {
+        setIsLoading(false);
+        return;
+      }
+  
+      const session = await getSession();
+      if (!session) {
+        router.push('/auth/signin');
+      } else {
+        setIsLoading(false);
+      }
+    };
+  
+    checkSession();
+  }, [router]);
+
+  if (isLoading) return <p>Loading...</p>; // Loading state while checking session
+
+
+
   return (
     <>
       <Head>
