@@ -17,12 +17,10 @@ export default function SignIn() {
     const result = await signIn('credentials', {
       phoneNumber,
       pin,
+      callbackUrl: '/', // Redirects to the home page after successful sign-in
     });
     
-
-    
     if (!result.error) {
-      console.log("res", result)
       router.push('/');
     } else {
       setError(result.error);
