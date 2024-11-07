@@ -31,6 +31,32 @@ export default function SignIn() {
     }
   };
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSession, setIsSession] = useState(false);
+  
+  
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = await getSession();
+      if (!session) {
+        if (router.pathname === '/auth/signin') {
+          console.log("on page")
+          setIsLoading(false);
+          return; 
+        } else {
+          console.log("no session")
+        }
+      } else {
+        setIsSession(session);
+        setIsLoading(false);
+        router.push('/');
+        console.log("go time")
+      }
+    };
+  
+    checkSession();
+  }, [router]);
+
   return (
     <div className="form-signin w-100 m-auto">
       <form onSubmit={handleLogin}>
