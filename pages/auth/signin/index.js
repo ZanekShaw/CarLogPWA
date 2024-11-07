@@ -20,8 +20,9 @@ export default function SignIn() {
       pin,
     });
 
+    console.log("res", result)
+
     if (!result.error) {
-      // Redirect to home page or desired page on success
       router.push('/');
     } else {
       setError(result.error);

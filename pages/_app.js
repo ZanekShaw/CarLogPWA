@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
   
       const session = await getSession();
       if (!session) {
-        router.push('/auth/signin');
+        //router.push('/auth/signin');
       } else {
         setIsSession(session)
         setIsLoading(false);
