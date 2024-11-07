@@ -18,13 +18,12 @@ export default function App({ Component, pageProps }) {
       // Exclude login and public pages from redirection
       if (router.pathname === '/auth/signin') {
         setIsLoading(false);
-        setIsSession(false)
         return; 
       }
   
       const session = await getSession();
       if (!session) {
-        //router.push('/auth/signin');
+        router.push('/auth/signin');
       } else {
         setIsSession(session)
         setIsLoading(false);
