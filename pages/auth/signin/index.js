@@ -1,6 +1,5 @@
 // pages/auth/signin.js
-import { signIn } from 'next-auth/react';
-import { SessionProvider, getSession } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -30,27 +29,14 @@ export default function SignIn() {
       setError(result.error);
     }
   };
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSession, setIsSession] = useState(false);
-  
   
   useEffect(() => {
     const checkSession = async () => {
       const session = await getSession();
       if (!session) {
-        if (router.pathname === '/auth/signin') {
-          console.log("on page")
-          setIsLoading(false);
-          return; 
-        } else {
-          console.log("no session")
-        }
+        console.log("no session")
       } else {
-        setIsSession(session);
-        setIsLoading(false);
         router.push('/');
-        console.log("go time")
       }
     };
   

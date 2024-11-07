@@ -9,17 +9,6 @@ export async function getServerSideProps(context) {
   // Retrieve session to get the logged-in user
   const session = await getSession(context);
 
-  // Check if a user is logged in
-  if (!session) {
-    // Redirect to login page if no user is logged in
-    return {
-      redirect: {
-        destination: '/auth/signin',
-        permanent: false,
-      },
-    };
-  }
-
   // Get the user's ID from the session object (assuming session contains user_id)
   const userId = session.user.id;
 
