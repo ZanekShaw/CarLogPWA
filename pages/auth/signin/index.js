@@ -15,9 +15,9 @@ export default function SignIn() {
     setError(null);
 
     const result = await signIn('credentials', {
+      redirect: false,
       phoneNumber,
-      pin,
-      callbackUrl: '/', // Redirects to the home page after successful sign-in
+      pin
     });
 
     console.log(result)
