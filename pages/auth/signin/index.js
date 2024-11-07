@@ -19,6 +19,8 @@ export default function SignIn() {
       pin,
       callbackUrl: '/', // Redirects to the home page after successful sign-in
     });
+
+    console.log(result)
     
     if (!result.error) {
       router.push('/');
