@@ -15,15 +15,14 @@ export default function SignIn() {
     setError(null);
 
     const result = await signIn('credentials', {
-      redirect: false,
       phoneNumber,
       pin,
-    });
+    });    
 
     
     if (!result.error) {
       console.log("res", result)
-      router.push('');
+      router.push('/');
     } else {
       setError(result.error);
     }
