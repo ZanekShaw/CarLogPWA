@@ -1,8 +1,8 @@
 // pages/auth/signin.js
-
-import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import { SessionProvider, getSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function SignIn() {
   const [phoneNumber, setPhoneNumber] = useState('');
