@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }) {
       if (!session) {
         router.push('/auth/signin');
       } else {
-        setIsSession(session)
+        setIsSession(session);
         setIsLoading(false);
       }
     };
@@ -33,6 +33,10 @@ export default function App({ Component, pageProps }) {
     checkSession();
   }, [router]);
 
+
+  if (isLoading) {return(<>loading..</>)}
+
+      
 
   return (
     <>
@@ -110,11 +114,7 @@ export default function App({ Component, pageProps }) {
         />
       </Head>
 
-      {!isSession ? 
         <Component {...pageProps} />
-      :
-        <Component {...pageProps} />
-      }
     </>
   );
 }

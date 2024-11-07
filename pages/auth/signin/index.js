@@ -24,7 +24,9 @@ export default function SignIn() {
     
     if (result.ok) {
       router.push('/');
+      console.log("ok")
     } else {
+      console.log("not ok")
       setError(result.error);
     }
   };
