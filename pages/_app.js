@@ -15,17 +15,16 @@ export default function App({ Component, pageProps }) {
   
   useEffect(() => {
     const checkSession = async () => {
-      // Exclude login and public pages from redirection
-      if (router.pathname === '/auth/signin') {
-        console.log("on page")
-        setIsLoading(false);
-        return; 
-      }
-  
       const session = await getSession();
       if (!session) {
-        router.push('/auth/signin');
-        console.log("no session")
+        if (router.pathname === '/auth/signin') {
+          console.log("on page")
+          setIsLoading(false);
+          return; 
+        } else {
+          router.push('/auth/signin');
+          console.log("no session")
+        }
       } else {
         setIsSession(session);
         setIsLoading(false);
