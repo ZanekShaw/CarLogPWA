@@ -5,18 +5,6 @@ import styles from "../styles/Home.module.css";
 import { getSession } from "next-auth/react";
 import { sql } from "@vercel/postgres";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-
 export async function getServerSideProps(context) {
   // Retrieve session to get the logged-in user
   const session = await getSession(context);

@@ -5,7 +5,7 @@ import { getUserByPhoneAndPin } from '../../../utils/authUtils'; // Custom funct
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      name: "Mobile Login",
+      name: "MobileLogin",
       credentials: {
         phoneNumber: { label: "Phone Number", type: "text" },
         pin: { label: "PIN", type: "password" },
