@@ -20,9 +20,9 @@ export default function SignIn() {
       pin,
     });
 
-    console.log("res", result)
-
+    
     if (!result.error) {
+      console.log("res", result)
       router.push('/');
     } else {
       setError(result.error);
