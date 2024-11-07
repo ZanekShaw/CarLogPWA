@@ -23,7 +23,7 @@ export default function SignIn() {
     
     if (!result.error) {
       console.log("res", result)
-      router.push('/test');
+      router.push('');
     } else {
       setError(result.error);
     }
