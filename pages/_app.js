@@ -3,26 +3,30 @@ import Head from "next/head";
 import { SessionProvider, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
+import '../styles/globals.css'
 
 
 export default function App({ Component, pageProps }) {
 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
+  const [isSession, setIsSession] = useState(false);
+  
   
   useEffect(() => {
     const checkSession = async () => {
       // Exclude login and public pages from redirection
       if (router.pathname === '/auth/signin') {
         setIsLoading(false);
-        return;
+        setIsSession(false)
+        return; 
       }
   
       const session = await getSession();
       if (!session) {
         router.push('/auth/signin');
       } else {
+        setIsSession(session)
         setIsLoading(false);
       }
     };
@@ -30,13 +34,11 @@ export default function App({ Component, pageProps }) {
     checkSession();
   }, [router]);
 
-  if (isLoading) return <p>Loading...</p>; // Loading state while checking session
-
-
 
   return (
     <>
       <Head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>My awesome PWA app</title>
         <meta name="description" content="Best PWA app in the world!" />
@@ -109,7 +111,12 @@ export default function App({ Component, pageProps }) {
           sizes="640x1136"
         />
       </Head>
-      <Component {...pageProps} />
+
+      {!isSession ? 
+        <Component {...pageProps} />
+      :
+        <Component {...pageProps} />
+      }
     </>
   );
 }

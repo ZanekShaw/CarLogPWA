@@ -29,26 +29,39 @@ export default function SignIn() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div class="form-signin w-100 m-auto">
       <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Phone Number"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="PIN"
-          value={pin}
-          onChange={(e) => setPin(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating">
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            id="floatingInput" 
+            className="form-control" 
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+            required
+          />
+          <label for="floatingInput">Phone Number</label>
+        </div>
+        <div class="form-floating">
+          <input
+            type="password"
+            placeholder="PIN"
+            className="form-control" 
+            id="floatingPassword" 
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
+            required
+          />
+          <label for="floatingPassword">Pin</label>
+        </div>
+
+        <button class="btn btn-primary w-100 py-2" type="submit">Login</button>
+
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }

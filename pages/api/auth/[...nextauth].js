@@ -18,7 +18,7 @@ export default NextAuth({
         if (user) {
           return user;
         } else {
-          throw new Error("Invalid phone number or PIN");
+          throw new Error("Invalid Phone Number or Pin");
         }
       },
     }),
